@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My POC of Image Upload</title>
+</head>
+
+<body>
+<div th:replace="fragments/resources :: resources"></div>
+<div th:replace="fragments/header :: header"></div>
+	<div class="container-fluid text-center">
+	
+		<div class="row content">
+			<div class="col-sm-8 text-left">
+			
+				<p>Hello</p>
+				<p><a href="#" th:href="@{/add}">Add account</a></p>
+				<p><a href="#" th:href="@{/upload}">Upload file</a></p>
+				<p><a href="#" th:href="@{/pictures}">Pictures</a></p>
+				<hr />
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>

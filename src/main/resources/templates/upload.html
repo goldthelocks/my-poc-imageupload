@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>My POC of Image Upload</title>
+</head>
+
+<body>
+	<div th:replace="fragments/resources :: resources"></div>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container-fluid text-center">
+
+		<div class="row content">
+			<div class="col-sm-8 text-left">
+
+				<h1>Upload image</h1>
+
+				<p>
+					<span th:text="${message}">[message]</span>
+				</p>
+
+				<form method="POST" th:action="@{/upload}"
+					enctype="multipart/form-data" th:object="${imageUpload}">
+
+					<ul>
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+					</ul>
+
+					<input type="text" th:placeholder="Username"
+						th:field="*{user.username}" id="username" name="username"
+						class="form-control" /> <br /> 
+					<input type="file" name="uploadedPictures" id="uploadedPictures"
+						th:field="*{uploadedPictures}" /> <br />
+<!-- 					<input type="file" name="uploadedPictures" id="uploadedPictures"
+						th:field="*{uploadedPictures}" /> <br />   -->
+					
+					<input type="submit" value="Submit" />
+				</form>
+
+				<hr />
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>
