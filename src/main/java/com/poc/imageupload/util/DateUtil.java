@@ -14,7 +14,7 @@ public final class DateUtil {
 
 	public static String getStringTime() {
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddyyyyhhmmss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddyyyyHHmmss");
 		return currentDateTime.format(formatter);
 	}
 }

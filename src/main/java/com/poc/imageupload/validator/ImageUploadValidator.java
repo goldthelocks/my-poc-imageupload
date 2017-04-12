@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -26,6 +27,9 @@ public class ImageUploadValidator implements Validator {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Value("${upload.file.max-file-size}")
+	private Integer maxFileSize;
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -56,13 +60,21 @@ public class ImageUploadValidator implements Validator {
 			errors.rejectValue("uploadedPictures", "file.empty");
 		} 
 		
+		int counterFileChecker = 0;
 		for (MultipartFile m : imageUploadDto.getUploadedPictures()) {
 
 			if (m.getSize() <= 0) {
-				errors.rejectValue("uploadedPictures", "file.empty");
+				counterFileChecker++;				
 			} else if (!getAllowedImageTypes().contains(m.getContentType())) {
 				errors.rejectValue("uploadedPictures", "file.imagesonly");
+			} else if (m.getSize() > maxFileSize) {
+				errors.rejectValue("uploadedPictures", "file.maxsize");
 			}
+		}
+		
+		System.out.println("counterFileChecker: " + counterFileChecker);
+		if (counterFileChecker == 4) {
+			errors.rejectValue("uploadedPictures", "file.empty");
 		}
 
 	}

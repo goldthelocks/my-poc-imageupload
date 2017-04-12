@@ -14,14 +14,21 @@
 
 				<p>Pictures</p>
 				<table>
-					<tr th:each="pic : ${imageList}">
+					<!-- <tr th:each="pic : ${imageList}"> -->
+					<tr th:each="pic : ${imageList.pageList}">
 						<td><img src="#" th:src="@{/} + ${pic.imageLocation}" /></td>
 						<td><span th:text="${pic.imageLocation}">[text]</span></td>
 					</tr>
 				</table>
 				<hr />
 			</div>
+
+			<div th:if="${pager.totalItems > 3}" class="row">
+				<div th:replace="fragments/pagination :: pagination" th:remove="tag">Pagination Control</div>
+			</div>
+
 		</div>
+
 	</div>
 
 	<div th:replace="fragments/footer :: footer"></div>

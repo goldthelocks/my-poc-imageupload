@@ -55,16 +55,18 @@ public class ImageUploadServiceImpl implements ImageUploadService {
 		Set<UserUpload> uploads = new HashSet<>();
 
 		for (MultipartFile m : multipartFile) {
-			File file = new File(uploadingDir + m.getOriginalFilename());
-			File newFile = new File(uploadingDir + DateUtil.getStringTime() + getFileExtension(file));
+			if (m.getSize() > 0) {
+				File file = new File(uploadingDir + m.getOriginalFilename());
+				File newFile = new File(uploadingDir + DateUtil.getStringTime() + getFileExtension(file));
 
-			System.out.println(newFile.getName());
+				System.out.println(newFile.getName());
 
-			m.transferTo(file);
+				m.transferTo(file);
 
-			Files.move(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				Files.move(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-			uploads.add(new UserUpload(getLocalDirectory(user, newFile), user));
+				uploads.add(new UserUpload(getLocalDirectory(user, newFile), user));
+			}
 		}
 
 		user.setUserUpload(uploads);

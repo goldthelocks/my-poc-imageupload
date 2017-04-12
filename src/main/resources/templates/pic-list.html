@@ -15,7 +15,7 @@
 				<p>Pictures</p>
 				<table>
 					<tr th:each="user : ${users}">
-						<td><a href="#" th:href="@{/pictures/} + ${user.username}"><span th:text="${user.username}"></span></a></td>
+						<td><a href="#" th:href="@{/pictures/user/} + ${user.id}"><span th:text="${user.username}"></span></a></td>
 					</tr>
 				</table>
 				<hr />

@@ -51,7 +51,6 @@ public class UploadController {
 	@PostMapping("/upload")
 	public String getUploadFilePage(@ModelAttribute("imageUpload") ImageUploadDto imageUploadDto,
 			BindingResult results) {
-
 		imageUploadValidator.validate(imageUploadDto, results);
 
 		try {
