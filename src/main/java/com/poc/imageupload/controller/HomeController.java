@@ -35,7 +35,6 @@ public class HomeController {
 	public String getCustomPicturePage(@PathVariable("username") String username, Model model) {
 		User user = userService.findByUsername(username);
 		List<UserUpload> pictures = imageUploadService.findByUser(user);
-//		Set<UserUpload> pictures = user.getUserUpload();
 		model.addAttribute("imageList", pictures);		
 		return "pics";
 	}
